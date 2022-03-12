@@ -1,0 +1,24 @@
+﻿<Window x:Class="AimTrainer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AimTrainer"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="15*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <Button x:Name="StartButton" Content="Start" HorizontalAlignment="Center" Click="StartButton_Click" />
+            <Button x:Name="ResetButton" Content="Reset" HorizontalAlignment="Center" Click="ResetButton_Click" />
+            <Label x:Name="ClickCountLabel" Content="0 Hits" HorizontalAlignment="Center" />
+            <Label x:Name="SecondCountLabel" HorizontalAlignment="Center" Content="60 seconds"/>
+        </StackPanel>
+        <Canvas x:Name="Court" Grid.Column="1" Background="Bisque">
+            <Ellipse x:Name="Ball" Width="30" Height="30" Fill="Red" MouseLeftButtonDown="Ball_MouseLeftButtonDown"/>
+        </Canvas>
+    </Grid>
+</Window>

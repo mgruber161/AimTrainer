@@ -5,19 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AimTrainer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="AimTrainer" Height="450" Width="800" Icon="/aimtrainerlogo.png">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="15*"/>
+            <ColumnDefinition Width="13*"/>
         </Grid.ColumnDefinitions>
         <StackPanel>
             <Button x:Name="StartButton" Content="Start" HorizontalAlignment="Center" Click="StartButton_Click" />
             <Button x:Name="ResetButton" Content="Reset" HorizontalAlignment="Center" Click="ResetButton_Click" />
             <Label x:Name="ClickCountLabel" Content="0 Hits" HorizontalAlignment="Center" />
-            <Label x:Name="SecondCountLabel" HorizontalAlignment="Center" Content="60 seconds"/>
+            <Label x:Name="SecondCountLabel" HorizontalAlignment="Center" Content="60"/>
+            <Label x:Name="DifficultyLabel" HorizontalAlignment="Center" Content="Difficulty" />
+            <Slider x:Name="DifficultySlider" Orientation="Vertical" Height="200" HorizontalAlignment="Center" ValueChanged="DifficultySlider_ValueChanged" />
+
         </StackPanel>
-        <Canvas x:Name="Court" Grid.Column="1" Background="Bisque">
+        <Canvas x:Name="Court" Grid.Column="1" Background="Bisque" MouseLeftButtonDown="Court_MouseLeftButtonDown">
             <Ellipse x:Name="Ball" Width="30" Height="30" Fill="Red" MouseLeftButtonDown="Ball_MouseLeftButtonDown"/>
         </Canvas>
     </Grid>

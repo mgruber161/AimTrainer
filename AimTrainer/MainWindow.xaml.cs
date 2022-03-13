@@ -27,6 +27,7 @@ namespace AimTrainer
         Random random = new Random(DateTime.Now.Millisecond);
         private int counter = 0;
         int timercount = 60;
+        double ballwidth = 30;
         public MainWindow()
         {
             InitializeComponent();
@@ -36,6 +37,9 @@ namespace AimTrainer
             timer2.Tick += Timer2_Tick;
             timer3.Interval = TimeSpan.FromMilliseconds(1);
             timer3.Tick += Timer3_Tick;
+            DifficultySlider.Minimum = 10;
+            DifficultySlider.Maximum = 50;
+            DifficultySlider.Value = 30;
         }
 
         private void Timer3_Tick(object? sender, EventArgs e)
@@ -50,6 +54,8 @@ namespace AimTrainer
             {
                 timer1.Stop();
                 timer2.Stop();
+                timer3.Stop();
+                DifficultySlider.IsEnabled = true;
             }
             else
             {
@@ -65,8 +71,11 @@ namespace AimTrainer
 
         private void MoveBallToRandomPos()
         {
-            Ball.Width = 30;
-            Ball.Height = 30;
+            timer1.Stop();
+            timer1.Start();
+
+            Ball.Width = ballwidth;
+            Ball.Height = ballwidth;
 
             var posX = random.Next(0, (int)(Court.ActualWidth - Ball.Width));
             var posY = random.Next(0, (int)(Court.ActualHeight - Ball.Height));
@@ -80,6 +89,7 @@ namespace AimTrainer
             timer1.Start();
             timer2.Start();
             timer3.Start();
+            DifficultySlider.IsEnabled = false;
             MoveBallToRandomPos();
         }
 
@@ -88,10 +98,12 @@ namespace AimTrainer
             timer1.Stop();
             timer2.Stop();
             timer3.Stop();
+            DifficultySlider.IsEnabled= true;
             counter = 0;
             timercount = 60;
             ClickCountLabel.Content = counter.ToString() + " Hits";
             SecondCountLabel.Content = timercount.ToString();
+            
         }
 
         private void Ball_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -100,10 +112,22 @@ namespace AimTrainer
             {
                 counter++;
                 ClickCountLabel.Content = counter.ToString() + " Hits";
-                timer1.Stop();
-                timer1.Start();
                 MoveBallToRandomPos();
             }
+            e.Handled = true;
+        }
+
+        private void Court_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if(timer1.IsEnabled)
+                MoveBallToRandomPos();
+        }
+
+        private void DifficultySlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            ballwidth = DifficultySlider.Value;
+            Ball.Width = ballwidth;
+            Ball.Height = ballwidth;
         }
     }
 }

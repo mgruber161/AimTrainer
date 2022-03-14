@@ -98,12 +98,14 @@ namespace AimTrainer
             timer1.Stop();
             timer2.Stop();
             timer3.Stop();
+
             DifficultySlider.IsEnabled= true;
+
             counter = 0;
             timercount = 60;
+
             ClickCountLabel.Content = counter.ToString() + " Hits";
             SecondCountLabel.Content = timercount.ToString();
-            
         }
 
         private void Ball_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

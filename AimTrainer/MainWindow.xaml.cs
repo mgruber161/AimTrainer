@@ -56,6 +56,7 @@ namespace AimTrainer
                 timer2.Stop();
                 timer3.Stop();
                 DifficultySlider.IsEnabled = true;
+                StartButton.IsEnabled = true;
             }
             else
             {
@@ -86,11 +87,14 @@ namespace AimTrainer
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
+            if(timercount < 60)
+                ResetButton_Click(sender, e);
             timer1.Start();
             timer2.Start();
             timer3.Start();
             DifficultySlider.IsEnabled = false;
             MoveBallToRandomPos();
+            StartButton.IsEnabled = false;
         }
 
         private void ResetButton_Click(object sender, RoutedEventArgs e)
@@ -106,6 +110,7 @@ namespace AimTrainer
 
             ClickCountLabel.Content = counter.ToString() + " Hits";
             SecondCountLabel.Content = timercount.ToString();
+            StartButton.IsEnabled = true;
         }
 
         private void Ball_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
